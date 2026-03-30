@@ -5,8 +5,15 @@
 
 void input(char *str);
 int cmd(char *str);
+int main();
+
 char opt[64];
-int loc = 1;
+
+typedef enum {
+    NONE,
+    LOOP,
+    EXIT,
+} State;
 
 void loop() {
     while(1) {
@@ -14,6 +21,8 @@ void loop() {
             printf("AAAAAA\n");
         } else if (cmd("soft")) {
             printf("aaaa...\n");
+        } else if (cmd("quit")  || cmd("q")) {
+            return;
         } else {
             printf("no command\n");
         }
@@ -36,6 +45,7 @@ void input(char *str) {
 }
 
 int main() {
+    State state = NONE;
     input(opt);
     printf("You said %s", opt);
     loop();
